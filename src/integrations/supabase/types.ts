@@ -5134,6 +5134,13 @@ export type Database = {
         Args: { _task_code: Database["public"]["Enums"]["daily_task_code"] }
         Returns: Json
       }
+      gam_complete_daily_task_for_user: {
+        Args: {
+          _task_code: Database["public"]["Enums"]["daily_task_code"]
+          _user_id: string
+        }
+        Returns: Json
+      }
       gam_compute_level: { Args: { _xp: number }; Returns: Json }
       gam_get_leaderboard: {
         Args: { _limit?: number; _period?: string }
