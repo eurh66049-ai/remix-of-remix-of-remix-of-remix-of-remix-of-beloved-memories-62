@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { gamification, type DailyTaskCode, type ShopCategory, type BookCompletionMethod } from '@/services/gamification';
@@ -7,12 +8,22 @@ const KEY = ['gamification', 'state'] as const;
 
 export function useGamificationState() {
   const { user } = useAuth();
-  return useQuery({
+  const qc = useQueryClient();
+  const query = useQuery({
     queryKey: [...KEY, user?.id ?? 'anon'],
     queryFn: () => gamification.getMyState(),
     enabled: !!user?.id,
     staleTime: 30_000,
   });
+
+  // الاستماع لإكمال المهام اليومية من باقي التطبيق وإعادة الجلب فوراً
+  useEffect(() => {
+    const handler = () => qc.invalidateQueries({ queryKey: [...KEY, user?.id ?? 'anon'] });
+    window.addEventListener('gamification:refresh', handler);
+    return () => window.removeEventListener('gamification:refresh', handler);
+  }, [qc, user?.id]);
+
+  return query;
 }
 
 export function useShopItems() {

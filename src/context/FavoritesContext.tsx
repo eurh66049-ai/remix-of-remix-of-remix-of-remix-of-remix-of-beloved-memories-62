@@ -123,6 +123,9 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
       }
       
       console.log('تم إضافة الكتاب بنجاح إلى قاعدة البيانات');
+
+      // إكمال المهمة اليومية: إضافة كتاب إلى قائمة القراءة
+      void import('@/utils/dailyTasks').then(m => m.markDailyTask('add_to_reading_list'));
       
       // تحديث الحالة المحلية
       setFavorites(prev => {

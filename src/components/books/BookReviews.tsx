@@ -184,6 +184,9 @@ const BookReviews: React.FC<BookReviewsProps> = ({ bookId, bookTitle }) => {
       setRating(0);
       setComment('');
       setUserHasReviewed(true);
+
+      // إكمال المهمة اليومية: إضافة تقييم/مراجعة
+      void import('@/utils/dailyTasks').then(m => m.markDailyTask('add_review'));
       
       // إعادة جلب التقييمات لعرض التحديثات
       setTimeout(() => {

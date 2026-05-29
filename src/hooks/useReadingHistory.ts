@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/context/AuthContext';
 import { createBookSlug } from '@/utils/bookSlug';
+import { markDailyTask } from '@/utils/dailyTasks';
 
 export interface ReadingHistoryItem {
   id: string;
@@ -134,6 +135,8 @@ export const useReadingHistory = () => {
         }, { onConflict: 'user_id,book_id' });
       if (upsertError) throw upsertError;
       await refreshHistory();
+      // إكمال المهمة اليومية: فتح كتاب لم تقرأه اليوم
+      void markDailyTask('read_new_book');
     } catch (err) {
       console.error('Error saving reading progress:', err);
     }
