@@ -51,7 +51,7 @@ const Rewards: React.FC = () => {
           <Stat icon={<Trophy className="text-amber-500" />} label="XP" value={data.xp.toLocaleString('ar')} />
           <Stat icon={<Coins className="text-yellow-500" />} label="Kotobi Coins" value={data.coins.toLocaleString('ar')} />
           <Stat icon={<Flame className="text-orange-500" />} label="السلسلة الحالية" value={`${data.current_streak} يوم`} />
-          <Stat icon={<Crown className="text-purple-500" />} label="أطول سلسلة" value={`${data.longest_streak} يوم`} />
+          <Stat icon={<Sparkles className="text-purple-500" />} label="أطول سلسلة" value={`${data.longest_streak} يوم`} />
         </div>
 
         <div className="mt-4">
