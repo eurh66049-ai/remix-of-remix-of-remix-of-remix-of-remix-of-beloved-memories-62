@@ -35,7 +35,7 @@ const Rewards: React.FC = () => {
   const doneSet = new Set<DailyTaskCode>(data.daily_tasks_completed);
 
   return (
-    <div className="container mx-auto px-4 py-6 pb-[14rem] md:pb-6 max-w-4xl" dir="rtl">
+    <div className="container mx-auto px-4 py-6 pb-64 md:pb-10 max-w-4xl" dir="rtl">
       <Helmet>
         <title>مكافآتي — كتبي</title>
         <meta name="description" content="نقاطك ومستواك وسلسلة قراءتك ومتجر النقاط في كتبي" />
