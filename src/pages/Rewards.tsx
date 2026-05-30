@@ -83,15 +83,13 @@ const Rewards: React.FC = () => {
       </Card>
 
       {/* روابط سريعة */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+      {/* روابط سريعة */}
+      <div className="grid grid-cols-2 gap-3 mb-6">
         <Link to="/shop">
           <Button variant="outline" className="w-full h-16 text-base"><ShoppingBag className="ml-2" /> متجر النقاط</Button>
         </Link>
-        <Link to="/mystery-boxes">
-          <Button variant="outline" className="w-full h-16 text-base"><Gift className="ml-2" /> صناديق المفاجآت</Button>
-        </Link>
         <Link to="/leaderboard">
-          <Button variant="outline" className="w-full h-16 text-base col-span-2 md:col-span-1"><Trophy className="ml-2" /> لوحة المتصدرين</Button>
+          <Button variant="outline" className="w-full h-16 text-base"><Trophy className="ml-2" /> لوحة المتصدرين</Button>
         </Link>
       </div>
 
