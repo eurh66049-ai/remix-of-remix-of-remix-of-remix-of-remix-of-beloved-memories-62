@@ -58,6 +58,7 @@ const ProfileCustomization = lazy(() => import('./pages/ProfileCustomization'));
 const Rewards = lazy(() => import('./pages/Rewards'));
 const Shop = lazy(() => import('./pages/Shop'));
 const Leaderboard = lazy(() => import('./pages/Leaderboard'));
+const MysteryBoxes = lazy(() => import('./pages/MysteryBoxes'));
 import DailyLoginModal from './components/gamification/DailyLoginModal';
 
 const queryClient = new QueryClient({
@@ -155,6 +156,8 @@ function AppContent() {
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/mystery-boxes" element={<MysteryBoxes />} />
+            <Route path="/collection" element={<MysteryBoxes />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
