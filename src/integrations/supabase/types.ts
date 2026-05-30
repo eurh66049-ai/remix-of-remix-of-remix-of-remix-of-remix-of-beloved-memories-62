@@ -229,6 +229,53 @@ export type Database = {
         }
         Relationships: []
       }
+      author_cards: {
+        Row: {
+          author_id: string
+          created_at: string
+          description_ar: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          rarity: Database["public"]["Enums"]["card_rarity"]
+          sort_order: number
+          title_ar: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          created_at?: string
+          description_ar?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          rarity: Database["public"]["Enums"]["card_rarity"]
+          sort_order?: number
+          title_ar: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          created_at?: string
+          description_ar?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          rarity?: Database["public"]["Enums"]["card_rarity"]
+          sort_order?: number
+          title_ar?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "author_cards_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "authors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       author_followers: {
         Row: {
           author_id: string
@@ -2264,6 +2311,137 @@ export type Database = {
         }
         Relationships: []
       }
+      mystery_box_openings: {
+        Row: {
+          box_id: string
+          created_at: string
+          id: string
+          price_paid: number
+          reward_card_id: string | null
+          reward_coins: number | null
+          reward_kind: Database["public"]["Enums"]["mystery_box_reward_kind"]
+          user_id: string
+        }
+        Insert: {
+          box_id: string
+          created_at?: string
+          id?: string
+          price_paid: number
+          reward_card_id?: string | null
+          reward_coins?: number | null
+          reward_kind: Database["public"]["Enums"]["mystery_box_reward_kind"]
+          user_id: string
+        }
+        Update: {
+          box_id?: string
+          created_at?: string
+          id?: string
+          price_paid?: number
+          reward_card_id?: string | null
+          reward_coins?: number | null
+          reward_kind?: Database["public"]["Enums"]["mystery_box_reward_kind"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mystery_box_openings_box_id_fkey"
+            columns: ["box_id"]
+            isOneToOne: false
+            referencedRelation: "mystery_boxes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mystery_box_openings_reward_card_id_fkey"
+            columns: ["reward_card_id"]
+            isOneToOne: false
+            referencedRelation: "author_cards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mystery_box_rewards: {
+        Row: {
+          box_id: string
+          card_rarity: Database["public"]["Enums"]["card_rarity"] | null
+          coins_max: number | null
+          coins_min: number | null
+          created_at: string
+          id: string
+          reward_kind: Database["public"]["Enums"]["mystery_box_reward_kind"]
+          weight: number
+        }
+        Insert: {
+          box_id: string
+          card_rarity?: Database["public"]["Enums"]["card_rarity"] | null
+          coins_max?: number | null
+          coins_min?: number | null
+          created_at?: string
+          id?: string
+          reward_kind: Database["public"]["Enums"]["mystery_box_reward_kind"]
+          weight: number
+        }
+        Update: {
+          box_id?: string
+          card_rarity?: Database["public"]["Enums"]["card_rarity"] | null
+          coins_max?: number | null
+          coins_min?: number | null
+          created_at?: string
+          id?: string
+          reward_kind?: Database["public"]["Enums"]["mystery_box_reward_kind"]
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mystery_box_rewards_box_id_fkey"
+            columns: ["box_id"]
+            isOneToOne: false
+            referencedRelation: "mystery_boxes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mystery_boxes: {
+        Row: {
+          code: string
+          created_at: string
+          description_ar: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          price_coins: number
+          rarity: Database["public"]["Enums"]["card_rarity"]
+          sort_order: number
+          title_ar: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description_ar?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          price_coins: number
+          rarity: Database["public"]["Enums"]["card_rarity"]
+          sort_order?: number
+          title_ar: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description_ar?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          price_coins?: number
+          rarity?: Database["public"]["Enums"]["card_rarity"]
+          sort_order?: number
+          title_ar?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       navigation_direction: {
         Row: {
           created_at: string
@@ -3951,6 +4129,41 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_author_cards: {
+        Row: {
+          card_id: string
+          count: number
+          first_obtained_at: string
+          id: string
+          last_obtained_at: string
+          user_id: string
+        }
+        Insert: {
+          card_id: string
+          count?: number
+          first_obtained_at?: string
+          id?: string
+          last_obtained_at?: string
+          user_id: string
+        }
+        Update: {
+          card_id?: string
+          count?: number
+          first_obtained_at?: string
+          id?: string
+          last_obtained_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_author_cards_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "author_cards"
             referencedColumns: ["id"]
           },
         ]
@@ -5981,6 +6194,7 @@ export type Database = {
       migrate_media_files: { Args: never; Returns: undefined }
       normalize_author_name: { Args: { author_name: string }; Returns: string }
       notify_indexnow: { Args: { p_urls: string[] }; Returns: undefined }
+      open_mystery_box: { Args: { p_box_id: string }; Returns: Json }
       permanently_delete_approved_book: {
         Args: { p_book_id: string; p_reason: string }
         Returns: {
@@ -6325,6 +6539,7 @@ export type Database = {
     }
     Enums: {
       book_completion_method: "auto_95pct" | "manual" | "time_based"
+      card_rarity: "common" | "rare" | "legendary"
       challenge_status: "upcoming" | "active" | "completed" | "cancelled"
       challenge_type: "reading" | "writing" | "quotes" | "reviews" | "followers"
       coins_reason:
@@ -6339,6 +6554,7 @@ export type Database = {
         | "add_review"
         | "add_to_reading_list"
         | "share_quote"
+      mystery_box_reward_kind: "coins" | "card"
       shop_item_category:
         | "name_color"
         | "avatar_frame"
@@ -6484,6 +6700,7 @@ export const Constants = {
   public: {
     Enums: {
       book_completion_method: ["auto_95pct", "manual", "time_based"],
+      card_rarity: ["common", "rare", "legendary"],
       challenge_status: ["upcoming", "active", "completed", "cancelled"],
       challenge_type: ["reading", "writing", "quotes", "reviews", "followers"],
       coins_reason: [
@@ -6500,6 +6717,7 @@ export const Constants = {
         "add_to_reading_list",
         "share_quote",
       ],
+      mystery_box_reward_kind: ["coins", "card"],
       shop_item_category: [
         "name_color",
         "avatar_frame",
